@@ -10,10 +10,11 @@ const GlobalStyles = createGlobalStyle`
     --red: #ff0000;
     --black: #393939;
     --grey: #3A3A3A;
-    --lightGrey: #E1e1e1;
+    --lightGray: #E1e1e1;
     --offWhite: #ededed;
     --maxWidth: 1000px;
     --boxShadow: 0 12px 24px 0 rgba(0,0,0,0.09);
+    font-size: 62.5%;
   }
 
   @font-face {

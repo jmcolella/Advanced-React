@@ -7,7 +7,8 @@
     "dev": "next -p 7777",
     "build": "next build",
     "start": "next start -p 7777",
-    "test": "NODE_ENV=test jest --watch"
+    "test": "NODE_ENV=test jest --watch",
+    "generate-graphql-types": "graphql-codegen"
   },
   "author": "",
   "license": "ISC",
@@ -40,9 +41,12 @@
     "@apollo/react-testing": "^4.0.0",
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
+    "@graphql-codegen/cli": "^1.21.3",
+    "@graphql-codegen/typescript": "^1.21.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.3.0",
+    "@types/node": "^14.14.37",
     "@types/nprogress": "^0.2.0",
     "@types/react": "^17.0.1",
     "@types/styled-components": "^5.1.7",
@@ -81,11 +85,13 @@
           "extensions": [
             ".js",
             ".ts",
-            ".tsx"
+            ".tsx",
+            ".d.ts"
           ]
         }
       }
     },
+    "ignorePatterns": ["lib/types.d.ts"],
     "rules": {
       "react/jsx-filename-extension": 0,
       "react/jsx-props-no-spreading": 0,
