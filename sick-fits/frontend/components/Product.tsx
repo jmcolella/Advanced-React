@@ -25,6 +25,19 @@ export default function ProductComponent({ product }: Props) {
       {product.price && <PriceTag>{formatMoney(product.price)}</PriceTag>}
 
       {product.description && <p>{product.description}</p>}
+
+      <div className="buttonList">
+        <Link
+          href={{
+            pathname: 'update',
+            query: {
+              id: product.id,
+            },
+          }}
+        >
+          Edit ✏️
+        </Link>
+      </div>
     </Item>
   );
 }

@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
+import Head from 'next/head';
 import { Product } from '../../lib/types';
 
 const PRODUCT_QUERY = gql`
@@ -10,7 +12,27 @@ const PRODUCT_QUERY = gql`
       id
       name
       description
+      photo {
+        altText
+        image {
+          publicUrlTransformed
+        }
+      }
     }
+  }
+`;
+
+const ProductStyles = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  max-width: var(--maxWidth);
+  align-items: center;
+  gap: 2rem;
+
+  img {
+    width: 100%;
+    object-fit: contain;
   }
 `;
 
@@ -19,7 +41,7 @@ export default function SingleProduct() {
   const { id } = router.query;
 
   const { data, loading, error } = useQuery<
-    Product,
+    { Product: Product },
     { id: string | undefined }
   >(PRODUCT_QUERY, {
     variables: {
@@ -36,5 +58,21 @@ export default function SingleProduct() {
     return <ErrorPage statusCode={500} />;
   }
 
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <ProductStyles>
+      <Head>
+        <title>Sick Fits | {data?.Product.name}</title>
+      </Head>
+      {data?.Product.photo?.image?.publicUrlTransformed && (
+        <img
+          src={data?.Product.photo?.image?.publicUrlTransformed}
+          alt={data?.Product.photo?.altText || ''}
+        />
+      )}
+      <div className="details">
+        <h2>{data?.Product.name}</h2>
+        <p>{data?.Product.description}</p>
+      </div>
+    </ProductStyles>
+  );
 }
