@@ -7,6 +7,7 @@ const Logo = styled.h1`
   font-size: 4rem;
   padding: 1rem 2rem;
   transform: skew(-7deg);
+  margin: 2rem 0;
 
   a {
     color: white;
@@ -19,10 +20,10 @@ const HeaderStyle = styled.header`
   .bar {
     border-bottom: 10px solid var(--black, black);
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: auto 1fr;
     justify-content: center;
-    align-items: center;
-    padding: 2rem 0;
+    align-items: stretch;
+    padding: 0 2rem;
   }
 
   .sub-bar {
@@ -40,13 +41,12 @@ function Header() {
         <Logo>
           <Link href="/">Sick fits</Link>
         </Logo>
+        <Nav />
       </div>
 
       <div className="sub-bar">
         <p>Search</p>
       </div>
-
-      <Nav />
     </HeaderStyle>
   );
 }
